@@ -61,12 +61,12 @@ class Bot(commands.Bot):
                 if('all' in message.content):
                     teamColor = messageSplit[8]
                     if(teamColor == 'RED.'):
-                        if username in balances.keys():
+                        if username in balances:
                             red_count += balances[username]
                         else:
                             red_all_in = True
                     if(teamColor == 'BLUE.'):
-                        if username in balances.keys():
+                        if username in balances:
                             blue_count += balances[username]
                         else:
                             blue_all_in = True
