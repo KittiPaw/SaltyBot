@@ -49,12 +49,12 @@ class Bot(commands.Bot):
             haveIndex = message.content.find(HAVE)
             if(balanceIndex != -1):
                 balanceIndex += len(BALANCE_IS)
-                possibleBalance = message.content[balanceIndex:].split(' ')[0]
+                possibleBalance = message.content[balanceIndex:].split(' ')[0].replace(',', '')
                 if(possibleBalance.isnumberic()):
                     balances[username] = possibleBalance
             elif(haveIndex != -1):
                 balanceIndex += len(HAVE)
-                possibleBalance = message.content[balanceIndex:].split(' ')[0]
+                possibleBalance = message.content[balanceIndex:].split(' ')[0].replace(',', '')
                 if(possibleBalance.isnumberic()):
                     balances[username] = possibleBalance
             elif(messageSplit[1] == 'You' and messageSplit[2] == 'placed'):
