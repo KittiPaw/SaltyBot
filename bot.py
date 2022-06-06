@@ -51,12 +51,12 @@ class Bot(commands.Bot):
                 balanceIndex += len(BALANCE_IS)
                 possibleBalance = message.content[balanceIndex:].split(' ')[0].replace(',', '')
                 if(possibleBalance.isnumeric()):
-                    balances[username] = possibleBalance
+                    balances[username] = int(possibleBalance)
             elif(haveIndex != -1):
                 balanceIndex += len(HAVE)
                 possibleBalance = message.content[balanceIndex:].split(' ')[0].replace(',', '')
                 if(possibleBalance.isnumeric()):
-                    balances[username] = possibleBalance
+                    balances[username] = int(possibleBalance)
             if(messageSplit[1] == 'You' and messageSplit[2] == 'placed'):
                 if((datetime.now() - latest_bet).total_seconds() > 300):
                     red_count = 0
