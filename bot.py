@@ -7,6 +7,8 @@ red_count = 0
 blue_count = 0
 red_all_in = False
 blue_all_in = False
+poss_blue_all = 0
+poss_red_all = 0
 latest_bet = datetime.now()
 balances = {}
 
@@ -31,9 +33,12 @@ class Bot(commands.Bot):
         if(message.author.name == 'malphite_bot'):
             global red_count
             global blue_count
+            global poss_blue_all
+            global poss_red_all
             global latest_bet
             global red_all_in
             global blue_all_in
+            global balances
             messageSplit = message.content.split(' ')
             username = messageSplit[0]
             # have {balance}
@@ -58,18 +63,18 @@ class Bot(commands.Bot):
                     blue_count = 0
                     red_all_in = False
                     blue_all_in = False
+                    poss_blue_all = 0
+                    poss_red_all = 0
                 if('all' in message.content):
                     teamColor = messageSplit[8]
                     if(teamColor == 'RED.'):
+                        red_all_in = True
                         if username in balances:
-                            red_count += balances[username]
-                        else:
-                            red_all_in = True
+                            poss_red_all += balances[username]
                     if(teamColor == 'BLUE.'):
+                        blue_all_in = True
                         if username in balances:
-                            blue_count += balances[username]
-                        else:
-                            blue_all_in = True
+                            poss_blue_all += balances[username]
                 else:
                     amount = int(messageSplit[3].replace(',', ''))
                     teamColor = messageSplit[6]
@@ -82,9 +87,11 @@ class Bot(commands.Bot):
                 response = response + "Blue: " + str(blue_count)
                 if(blue_all_in):
                     response = response + "*"
+                    response += ' PAI: ' + str(poss_blue_all) 
                 response = response + " Red: " + str(red_count)
                 if(red_all_in):
                     response = response + "*"
+                    response += ' PAI: ' + str(poss_blue_all) 
                 print("\t\t\t\t\t\t", end='\r')
                 print(response, end='\r')
 
