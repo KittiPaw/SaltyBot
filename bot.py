@@ -47,16 +47,20 @@ class Bot(commands.Bot):
             HAVE = 'have '
             balanceIndex = message.content.find(BALANCE_IS)
             haveIndex = message.content.find(HAVE)
+            print("balance index = {}".format(balanceIndex))
+            print("have index = {}".format(haveIndex))
             if(balanceIndex != -1):
                 balanceIndex += len(BALANCE_IS)
-                possibleBalance = message.content[balanceIndex:].split(' ')[0].replace(',', '')
+                possibleBalance = message.content[balanceIndex:].split(' ')[0].replace(',', '').replace('‚', '')
                 if(possibleBalance.isnumeric()):
                     balances[username] = int(possibleBalance)
+                    #print("Updated user {}'s balance to {}".format(username, int(possibleBalance)))
             elif(haveIndex != -1):
-                balanceIndex += len(HAVE)
-                possibleBalance = message.content[balanceIndex:].split(' ')[0].replace(',', '')
+                haveIndex += len(HAVE)
+                possibleBalance = message.content[haveIndex:].split(' ')[0].replace('‚', '').replace(',', '')
                 if(possibleBalance.isnumeric()):
                     balances[username] = int(possibleBalance)
+                    #print("Updated user {}'s balance to {}".format(username, int(possibleBalance)))
             if(messageSplit[1] == 'You' and messageSplit[2] == 'placed'):
                 if((datetime.now() - latest_bet).total_seconds() > 300):
                     red_count = 0
