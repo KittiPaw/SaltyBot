@@ -27,7 +27,7 @@ class Bot(commands.Bot):
         print(f'Logged in as | {self.nick}')
         print(f'User id is | {self.user_id}')
         print("Current total")
-        print("* Denotes that there was an all-in, undetermined amount")
+        print("* Denotes that there was an all-in. Pot displays as {TotalWithAllIn}({EstimatedAllIn})*")
 
     async def event_message(self, message):
         if(message.author.name == 'malphite_bot'):
@@ -86,14 +86,12 @@ class Bot(commands.Bot):
                         blue_count = blue_count + amount
                 latest_bet = datetime.now()
                 response = ""
-                response = response + "Blue: " + str(blue_count)
+                response = response + "Blue: " + str(blue_count + poss_blue_all)
                 if(blue_all_in):
-                    response = response + "*"
-                    response += ' PAI: ' + str(poss_blue_all) 
-                response = response + " Red: " + str(red_count)
+                    response += '(' + str(poss_blue_all) +')*' 
+                response = response + " Red: " + str(red_count + poss_red_all)
                 if(red_all_in):
-                    response = response + "*"
-                    response += ' PAI: ' + str(poss_red_all) 
+                    response += '(' + str(poss_red_all) +')*' 
                 print("\t\t\t\t\t\t", end='\r')
                 print(response, end='\r')
 
