@@ -47,8 +47,6 @@ class Bot(commands.Bot):
             HAVE = 'have '
             balanceIndex = message.content.find(BALANCE_IS)
             haveIndex = message.content.find(HAVE)
-            print("balance index = {}".format(balanceIndex))
-            print("have index = {}".format(haveIndex))
             if(balanceIndex != -1):
                 balanceIndex += len(BALANCE_IS)
                 possibleBalance = message.content[balanceIndex:].split(' ')[0].replace(',', '').replace('‚', '')
@@ -95,7 +93,7 @@ class Bot(commands.Bot):
                 response = response + " Red: " + str(red_count)
                 if(red_all_in):
                     response = response + "*"
-                    response += ' PAI: ' + str(poss_blue_all) 
+                    response += ' PAI: ' + str(poss_red_all) 
                 print("\t\t\t\t\t\t", end='\r')
                 print(response, end='\r')
 
